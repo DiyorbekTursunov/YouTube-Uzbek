@@ -10,7 +10,7 @@ const VideoDatail = () => {
     const [like, setlike] = useState('text-[#fff]')
     const [comment, setcomment] = useState('text-[#fff]')
     const [sub, setsub] = useState('bg-[#ff0707] text-[#fff]')
-    const [line, setline] = useState('')
+    const [line, setline] = useState(2)
   const VideoId = useParams();
   useEffect(() => {
     const getData = async () =>{
@@ -64,7 +64,7 @@ const VideoDatail = () => {
                </div>
                <div className="mt-6">
                     <pre className={`2xl:text-[18px] max-sm:text-[12px] text-white text-justify whitespace-pre-wrap line-clamp-${line}`}>{e.snippet.description}</pre>
-                    <span className="text-[#AAAAAA]" onClick={() => setline()}>Show More</span>
+                    <span className="text-[#AAAAAA]" onClick={() => setline(line === 2 ? 500 : 2)}>Show More</span>
                </div>
             </div>
         </div>)})}
