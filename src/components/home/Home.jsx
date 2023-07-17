@@ -3,7 +3,7 @@ import Categorys from '../Categorys/Categorys'
 import { ApiService } from '../../service/api.servise'
 import Video from '../video/Video'
 const Home = () => {
-  const [selectedCatigory , setSelectedCatigory] = useState('Subyektiv')
+  const [selectedCatigory , setSelectedCatigory] = useState('Texno Plov')
   const selectHendel = (catigory) => setSelectedCatigory(catigory)
   const [videos, setVideos] = useState(null)
   useEffect(() => {

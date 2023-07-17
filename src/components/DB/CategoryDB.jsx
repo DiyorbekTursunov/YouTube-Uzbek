@@ -1,6 +1,6 @@
 let CategorysData = [
     {
-        title:'Subyektiv',
+        title:'Texno Plov',
         id:1
     },
     {
@@ -12,7 +12,7 @@ let CategorysData = [
         id:3
     },
     {
-        title:'Texno Plov',
+        title:'Subyektiv',
         id:4
     },
     {
