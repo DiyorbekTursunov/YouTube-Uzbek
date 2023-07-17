@@ -1,5 +1,4 @@
 import SearchInput from "./searchInput/searchInput";
-import logo from "../images/Logo_of_YouTube_(2015-2017).svg.png";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
