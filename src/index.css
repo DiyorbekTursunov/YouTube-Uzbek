@@ -1,13 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+#Selected {
+  background-color: white;
+  color: #000;
+}
+#UnSelected {
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+*::-webkit-scrollbar {
+   width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+   border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+   height: 56px;
+   border-radius: 8px;
+   border: 4px solid transparent;
+   background-clip: content-box;
+   background-color: #888;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+   background-color: #555;
+}
+
+iframe[flexy] {
+   --ytd-watch-flexy-width-ratio: 16;
+   --ytd-watch-flexy-height-ratio: 9;
+   --ytd-watch-flexy-space-below-player: 136px;
+   --ytd-watch-flexy-non-player-height: calc( var(--ytd-watch-flexy-masthead-height) + var(--ytd-margin-6x) + var(--ytd-watch-flexy-space-below-player) );
+   --ytd-watch-flexy-non-player-width: calc( var(--ytd-watch-flexy-sidebar-width) + (3 * var(--ytd-margin-6x)) );
+   --ytd-watch-flexy-min-player-height: 240px;
+   --ytd-watch-flexy-min-player-width: calc( var(--ytd-watch-flexy-min-player-height) * (var(--ytd-watch-flexy-width-ratio) / var(--ytd-watch-flexy-height-ratio)) );
+   --ytd-watch-flexy-max-player-height: calc( 100vh - ( var(--ytd-watch-flexy-masthead-height) + var(--ytd-margin-6x) + var(--ytd-watch-flexy-space-below-player) ) );
+   --ytd-watch-flexy-max-player-width: calc( ( 100vh - ( var(--ytd-watch-flexy-masthead-height) + var(--ytd-margin-6x) + var(--ytd-watch-flexy-space-below-player) ) ) * (var(--ytd-watch-flexy-width-ratio) / var(--ytd-watch-flexy-height-ratio)) );
+}
+iframe {
+   --ytd-watch-flexy-sidebar-width: 402px;
+   --ytd-watch-flexy-sidebar-min-width: 300px;
+   --ytd-watch-flexy-masthead-height: 56px;
+   min-width: 0;
 }
