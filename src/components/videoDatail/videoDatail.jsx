@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {ApiService} from '../../service/api.servise'
 import moment from "moment";
-import likeIcon from '../images/liked.png'
 import Suggested from "../Suggested/Suggested";
 const VideoDatail = () => {
     const [VideoDatail , setVideoDatail] = useState([])
