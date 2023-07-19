@@ -8,12 +8,15 @@ const Suggested = ({ SuggestedVideo }) => {
       {SuggestedVideo &&
         SuggestedVideo.map((video) => {
           return (
-            <div className="cursor-pointer flex sm:items-center max-sm:items-start md:flex-row sm:flex-col max-sm:flex-col  flex-col justify-center gap-[20px] max-w-[400px]" key={video.id.videoId}>
+            <div
+              className="cursor-pointer flex sm:items-center max-sm:items-start md:flex-row sm:flex-col max-sm:flex-col  flex-col justify-center gap-[20px] max-w-[400px]"
+              key={video.id.videoId}
+            >
               <Link to={`/video/${video.id.videoId}`}>
                 <div>
                   <img
                     src={video.snippet.thumbnails.high.url}
-                    alt=""
+                    alt="Video img"
                     className="rounded-[10px] truncate w-[308px] object-cover sm:h-[] max-sm:h-[220px]"
                   />
                 </div>
@@ -21,7 +24,7 @@ const Suggested = ({ SuggestedVideo }) => {
               <div className="2xl:w-[368px] lg:w-[300px] overflow-hidden">
                 <Link to={`/video/${video.id.videoId}`}>
                   <h2 className="text-[14px] text-white font-medium lg:line-clamp-2 max-lg:line-clamp-1 ">
-                    {video.snippet.description.slice(0,35)}...
+                    {video.snippet.description.slice(0, 35)}...
                   </h2>
                 </Link>
                 <div className="flex items-start">

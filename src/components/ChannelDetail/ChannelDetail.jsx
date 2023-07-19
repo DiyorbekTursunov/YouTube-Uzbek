@@ -31,7 +31,7 @@ const ChannelDetail = () => {
         <hr className="opacity-30 my-10" />
       <div className='flex justify-between mt-[16px] sm:flex-row max-sm:flex-col max-sm:items-center gap-3'>
         <div className='flex items-center sm:flex-row max-sm:flex-col gap-4 '>
-            <img src={ChannelDetail && ChannelDetail.snippet.thumbnails.high.url} alt="" className='rounded-[50%] w-[100px] h-[100px]' />
+            <img src={ChannelDetail && ChannelDetail.snippet.thumbnails.high.url} alt="Channel image" className='rounded-[50%] w-[100px] h-[100px]' />
             <div className='text-white sm:text-start max-sm:text-center'>
               <h2>{ChannelDetail && ChannelDetail.brandingSettings.channel.title}</h2>
               <p>{parseInt(ChannelDetail && ChannelDetail.statistics.subscriberCount).toLocaleString()} subscribers</p>
