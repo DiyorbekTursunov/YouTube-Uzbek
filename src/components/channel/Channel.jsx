@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Channel = ({video}) => {
   return (
-    <div className='flex flex-col justify-center gap-5 cursor-pointer'>
+    <div className='flex flex-col justify-center gap-5 cursor-pointer' >
       <Link to={`/channel/${video?.snippet?.channelId}`}>
         <img src={video.snippet.thumbnails.high.url} alt="Channel image" className='rounded-[50%] w-[180px] h-[180px]'/>
       </Link>

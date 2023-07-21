@@ -4,10 +4,11 @@ import Search from './components/Search/Search'
 import Navbar from './components/navbar/Navbar'
 import VideoDatail from './components/videoDatail/videoDatail'
 import ChannelDetail from './components/ChannelDetail/ChannelDetail'
+import { Fragment } from 'react'
 function App() {
 
   return (
-    <>
+    <div>
       <div className='w-full bg-[#212121]'>
         <div className='max-w-[1440px] mx-auto px-2'>
           <Navbar/>
@@ -19,7 +20,7 @@ function App() {
             <Route path='/channel/:id' element={<ChannelDetail/>}/>
             <Route path='/search/:id' element={<Search/>}/>
       </Routes>
-    </>
+    </div>
   )
 }
 
