@@ -4,9 +4,7 @@ import Search from './components/Search/Search'
 import Navbar from './components/navbar/Navbar'
 import VideoDatail from './components/videoDatail/videoDatail'
 import ChannelDetail from './components/ChannelDetail/ChannelDetail'
-import { Fragment } from 'react'
 function App() {
-
   return (
     <div>
       <div className='w-full bg-[#212121]'>
