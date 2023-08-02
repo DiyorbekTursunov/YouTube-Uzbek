@@ -2,13 +2,13 @@ import moment from "moment/moment";
 import { Link } from "react-router-dom";
 const VideoCard = ({ video }) => {
   return (
-    <div className="">
-      <Link to={`/video/${video.id.videoId}`}>
-        <div>
+    <div className="bg-black px-3 py-2 rounded-lg h-[400px] ">
+      <Link to={`/video/${video.id.videoId}`}  className="sm:w-[300px] max-sm:max-w-[250px] bg-slate-300">
+        <div className="w-full bg-slate-400 rounded-[10px]">
           <img
             src={video.snippet.thumbnails.high.url}
             alt="Video image"
-            className="rounded-[10px] sm:w-[300px] max-sm:max-w-[250px] truncate cursor-pointer"
+            className="rounded-[10px] w-full h-full truncate cursor-pointer"
           />
         </div>
       </Link>

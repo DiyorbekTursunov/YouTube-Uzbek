@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ApiService } from '../../service/api.servise'
+import bannerImg from '../images/banner.png'
 import Video from '../video/Video'
 const ChannelDetail = () => {
   const [sub, setsub] = useState('bg-[#ff0707] text-[#fff]')
@@ -13,7 +14,7 @@ const ChannelDetail = () => {
           try {
             const data = await ApiService.Feching(`channels?part=snippet&id=${channelId.id}`)
             setChannelDetail(data.items[0])
-            setbanner(data.items[0].brandingSettings.image.bannerExternalUrl === undefined || null ? '': data.items[0].brandingSettings.image.bannerExternalUrl)
+            setbanner(data.items[0].brandingSettings.image.bannerExternalUrl === undefined || null ? 'DefBanner': data.items[0].brandingSettings.image.bannerExternalUrl)
             const dataVideo = await ApiService.Feching(`search?channelId=${channelId.id}&part=snippet`)
             setChannelVideo(dataVideo.items)
           } catch (error) {
@@ -22,11 +23,12 @@ const ChannelDetail = () => {
         }
         getData()
     }, [channelId])
+    console.log(banner);
   return (
     <div className='w-full bg-[#303030]'>
       <div className='max-w-[1440px] mx-auto pt-[30px]'>
         <div className='text-center'>
-          <img src={banner} alt="" className='w-[100%] sm:h-[250px] max-sm:h-[60px]  object-cover overflow-hidden'/>
+          <img src={banner == null ? bannerImg : banner} alt="" className='w-[100%] sm:h-[250px] max-sm:h-[60px]  object-cover overflow-hidden'/>
         </div>
         <hr className="opacity-30 my-10" />
       <div className='flex justify-between mt-[16px] sm:flex-row max-sm:flex-col max-sm:items-center gap-3'>

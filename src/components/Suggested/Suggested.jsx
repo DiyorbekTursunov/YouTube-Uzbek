@@ -9,7 +9,7 @@ const Suggested = ({ SuggestedVideo }) => {
         SuggestedVideo.map((video) => {
           return (
             <div
-              className="cursor-pointer flex sm:items-center max-sm:items-start md:flex-row sm:flex-col max-sm:flex-col  flex-col justify-center gap-[20px] max-w-[400px]"
+              className="cursor-pointer flex sm:items-center max-sm:items-start md:flex-row sm:flex-col max-sm:flex-col  flex-col justify-center gap-[20px] max-w-[400px] bg-black px-3 py-2 rounded-2xl"
               key={video.id.videoId}
             >
               <Link to={`/video/${video.id.videoId}`}>
