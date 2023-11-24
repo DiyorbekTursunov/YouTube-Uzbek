@@ -16,7 +16,7 @@ let CategorysData = [
     id: 4,
   },
   {
-    title: "Botir Ziyoyev",
+    title: "Botir Ziyatov",
     id: 5,
   },
   {
