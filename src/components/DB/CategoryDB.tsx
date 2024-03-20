@@ -1,4 +1,4 @@
-let CategorysData = [
+const CategorysData = [
   {
     title: "Texno Plov",
     id: 1,
