@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router'
 import { Home } from './components/home/Home'
 import { VideoDetail } from './components/videoDatail/videoDatail'
-import Search from './components/Search/Search'
-import ChannelDetail from './components/ChannelDetail/ChannelDetail'
-import Navbar from './components/navbar/Navbar'
+import { Search } from './components/Search/Search'
+import { ChannelDetail } from './components/ChannelDetail/ChannelDetail'
+import { Navbar } from './components/navbar/Navbar'
 
 function App() {
 

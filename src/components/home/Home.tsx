@@ -3,14 +3,21 @@ import Categorys from "../Categorys/Categorys";
 import Video from "../video/Video";
 import { ApiService } from "../../service/api.servise";
 import errorImage from "../images/error.png"
+
+//types 
+import { homevideosType, catchErrorType } from "types";
+
 export const Home = () => {
-  const [videos, setVideos] = useState<any>(null);
+
+  const [videos, setVideos] = useState<homevideosType | null>(null);
   const [selectedCatigory, setSelectedCatigory] = useState<string>("Texno Plov");
   const [loading, setloading] = useState<boolean>(false)
   const [isError, setisError] = useState<boolean>()
   const [errorMassage, seterrorMassage] = useState<boolean>()
 
+  // 
   const selectHendel = (catigory: string) => setSelectedCatigory(catigory);
+
   useEffect(() => {
     const getData = async () => {
       setloading(true)
@@ -23,9 +30,10 @@ export const Home = () => {
         setloading(false)
         setisError(false)
         seterrorMassage(false)
-      } catch (error: any) {
+      } catch (error: catchErrorType | any) {
         console.log(error);
         if (error.code === "ERR_NETWORK") seterrorMassage(true)
+        console.log(error);
         
         setloading(false)
         setisError(true)
@@ -45,8 +53,8 @@ export const Home = () => {
         {videos && <Video channelVideo={videos.items} />}
         {isError && <div className="text-white flex flex-col items-center">
           <img src={errorImage} alt="error image" className="pb-3" />
-          <h1 className="text-[#838383] text-center text-3xl pb-3">{errorMassage  ? "Network Error" : "Interlal server error please try again later" }</h1>
-          <p className="text-center text-[#838383]">{!! errorMassage || "more details: the number of requests for the youtube api is over, if more than 500 requests are sent per day, the server will stop working, please try tomorrow"}</p>
+          <h1 className="text-[#838383] text-center text-3xl pb-3">{errorMassage ? "Network Error" : "Interlal server error please try again later"}</h1>
+          <p className="text-center text-[#838383]">{!!errorMassage || "more details: the number of requests for the youtube api is over, if more than 500 requests are sent per day, the server will stop working, please try tomorrow"}</p>
         </div>}
       </div>
     </div>

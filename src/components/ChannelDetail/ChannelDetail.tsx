@@ -5,31 +5,38 @@ import Video from '../video/Video'
 import { ApiService } from '../../service/api.servise'
 
 
-const ChannelDetail: React.FC = () => {
+//types
+import { channelDetailType, channelVideoType } from 'types' 
+
+
+
+export const ChannelDetail: React.FC = () => {
   const [sub, setSub] = useState<string>('bg-[#ff0707] text-[#fff]');
-  const [channelDetail, setChannelDetail] = useState<any | null>(null);
-  const [channelVideo, setChannelVideo] = useState<any | null>(null);
+  const [channelDetail, setChannelDetail] = useState<channelDetailType | null>(null);
+  const [channelVideo, setChannelVideo] = useState<channelVideoType | null>(null);
   const [banner, setBanner] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false) // Changed setloading to setLoading
+  const [loading, setLoading] = useState(false)
   const { id } = useParams<{ id: string }>();
+
 
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true) // Changed setloading to setLoading
+      setLoading(true)
       try {
         const data = await ApiService.Feching(`channels?part=snippet&id=${id}`);
         setChannelDetail(data.items[0]);
         setBanner(data.items[0].brandingSettings.image.bannerExternalUrl || 'DefBanner');
         const dataVideo = await ApiService.Feching(`search?channelId=${id}&part=snippet`);
         setChannelVideo(dataVideo.items);
-        setLoading(false) // Changed setloading to setLoading
+        setLoading(false)
       } catch (error) {
-        setLoading(false) // Changed setloading to setLoading
+        setLoading(false)
       }
     }
     getData();
   }, [id]);
+
 
   return (
     <div className='w-full bg-[#303030]'>
@@ -63,12 +70,9 @@ const ChannelDetail: React.FC = () => {
       <div>
         <div className='max-w-[1440px] mx-auto mt-[100px]'>
           <Video channelVideo={channelVideo} />
-
         </div>
       </div>
 
     </div>
   )
 }
-
-export default ChannelDetail

@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { ApiService } from "../../service/api.servise";
 import Video from "../video/Video";
 
+
+//typs 
+import { catchErrorType } from "types";
+
 import errorImage from '../images/error.png'
 
 interface SearchVideoData {
@@ -28,7 +32,7 @@ interface SearchVideoData {
 }
 
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const [videos, setVideos] = useState<SearchVideoData[] | null>(null); // Updated to use SearchVideoData
   const [isError, setisError] = useState<boolean>()
   const [loading, setloading] = useState(false)
@@ -45,7 +49,7 @@ const Search: React.FC = () => {
         setloading(false)
         setisError(false)
         seterrorMassage(false)
-      } catch (error: any) {
+      } catch (error: catchErrorType | any) {
         if (error.code === "ERR_NETWORK") seterrorMassage(true)
         setloading(false)
         setisError(true)
@@ -77,5 +81,3 @@ const Search: React.FC = () => {
     </div>
   );
 };
-
-export default Search;

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { SearchInput } from "./searchInput/searchInput";
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <div className=" w-full flex mx-auto justify-between items-center sm:flex-row max-sm:flex-col max-sm:gap-5 py-2 px-2 ">
-      <Link to={"/"}>
+      <Link to={"/"} aria-label="Go to home page">
         <svg
           viewBox="0 0 90 20"
           preserveAspectRatio="xMidYMid meet"
@@ -72,5 +72,3 @@ const Navbar = () => {
     </div>
   );
 };
-
-export default Navbar;

@@ -11,8 +11,7 @@ const Categorys = ({ selectHendel, selectedCatigory }: CategorysProps) => {
       {CategorysData.map((e) => {
         return (
           <button
-            className="py-[8px] whitespace-nowrap h-8 rounded-lg outline-none text-[14px] font-medium px-3 transition-all cursor-pointer "
-            id={e.title === selectedCatigory ? "Selected" : "UnSelected"}
+            className={`py-[8px] whitespace-nowrap h-8 rounded-lg outline-none text-[14px] font-medium px-3 transition-all cursor-pointer ${e.title === selectedCatigory ? "Selected" : "UnSelected"}`}
             onClick={() => selectHendel(e.title)}
             key={e.id}
           >

@@ -1,30 +1,15 @@
-import React from "react";
 import { Fragment } from "react";
 import VideoCard from "../videoCard/videoCard";
 
-interface VideoData {
-  id: {
-    videoId?: string;
-    channelId?: string;
-  };
-  snippet?: {
-    thumbnails?: {
-      high?: {
-        url?: string;
-      };
-    };
-    description?: string;
-    channelId?: string;
-    channelTitle?: string;
-    publishedAt?: string;
-  };
-}
+//types
+import { channelVideoType } from "types";
 
-interface VideoProps {
-  channelVideo: VideoData[]; 
-}
 
-const Video: React.FC<VideoProps> = ({ channelVideo }) => {
+
+
+const Video: React.FC<{channelVideo: channelVideoType[]}> = ({ channelVideo }) => {
+  console.log(channelVideo);
+  
   return (
       <div className="flex flex-wrap justify-center">
         {channelVideo &&

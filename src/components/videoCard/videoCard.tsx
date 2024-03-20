@@ -2,28 +2,13 @@ import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-interface VideoData {
-  id: {
-    videoId?: string;
-  };
-  snippet?: {
-    thumbnails?: {
-      high?: {
-        url?: string;
-      };
-    };
-    title?: string;
-    channelId?: string;
-    channelTitle?: string;
-    publishedAt?: string;
-  };
-}
+//type 
+import { VideoDataType } from "types";
 
-interface VideoCardProps {
-  video: VideoData;
-}
 
-const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
+
+
+const VideoCard: React.FC<{ video: VideoDataType }> = ({ video }) => {
     
   return (
     <div className=" px-3 py-2 rounded-lg  ">
