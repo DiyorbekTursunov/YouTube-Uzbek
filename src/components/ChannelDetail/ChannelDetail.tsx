@@ -4,45 +4,28 @@ import bannerImg from '../images/banner.png'
 import Video from '../video/Video'
 import { ApiService } from '../../service/api.servise'
 
-interface ChannelDetailData {
-  snippet: {
-    thumbnails: {
-      high: {
-        url: string;
-      };
-    };
-  };
-  brandingSettings: {
-    channel: {
-      title: string;
-    };
-  };
-  statistics?: { // Make statistics optional
-    subscriberCount?: string; // Make subscriberCount optional
-  };
-}
 
 const ChannelDetail: React.FC = () => {
   const [sub, setSub] = useState<string>('bg-[#ff0707] text-[#fff]');
-  const [channelDetail, setChannelDetail] = useState<ChannelDetailData | null>(null);
-  const [channelVideo, setChannelVideo] = useState<any[] | null>(null);
+  const [channelDetail, setChannelDetail] = useState<any | null>(null);
+  const [channelVideo, setChannelVideo] = useState<any | null>(null); 
   const [banner, setBanner] = useState<string | null>(null);
-  const [loading, setloading] = useState(false)
+  const [loading, setLoading] = useState(false) // Changed setloading to setLoading
   const { id } = useParams<{ id: string }>();
 
 
   useEffect(() => {
     const getData = async () => {
-      setloading(true)
+      setLoading(true) // Changed setloading to setLoading
       try {
         const data = await ApiService.Feching(`channels?part=snippet&id=${id}`);
         setChannelDetail(data.items[0]);
         setBanner(data.items[0].brandingSettings.image.bannerExternalUrl || 'DefBanner');
         const dataVideo = await ApiService.Feching(`search?channelId=${id}&part=snippet`);
         setChannelVideo(dataVideo.items);
-        setloading(false)
+        setLoading(false) // Changed setloading to setLoading
       } catch (error) {
-        setloading(false)
+        setLoading(false) // Changed setloading to setLoading
       }
     }
     getData();
@@ -78,12 +61,13 @@ const ChannelDetail: React.FC = () => {
         </div>
       </div>
       <div>
-        <div className='max-w-[1440px] mx-auto mt-[100px]'>
-          <Video videos={channelVideo || []} />
-        </div>
-      </div>
+  <div className='max-w-[1440px] mx-auto mt-[100px]'>
+    <Video channelVideo={channelVideo} /> {/* Change channelVideo to videos */}
+  </div>
+</div>
+
     </div>
   )
 }
 
-export default ChannelDetail;
+export default ChannelDetail

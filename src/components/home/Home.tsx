@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Categorys from "../Categorys/Categorys";
 import Video from "../video/Video";
-import errorImage from '../images/error.png'
 import { ApiService } from "../../service/api.servise";
+import errorImage from "../images/error.png"
 export const Home = () => {
   const [videos, setVideos] = useState<any>(null);
   const [selectedCatigory, setSelectedCatigory] = useState<string>("Texno Plov");
