@@ -72,7 +72,7 @@ const Search: React.FC = () => {
       </div>}
       <div className="max-w-[3500px] mx-auto pt-4">
         {/* Ensure videos is not null before passing to Video component */}
-        {videos && <Video videos={videos} />}
+        {videos && <Video channelVideo={videos} />}
       </div>
     </div>
   );

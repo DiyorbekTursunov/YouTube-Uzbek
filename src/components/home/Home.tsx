@@ -42,7 +42,7 @@ export const Home = () => {
           selectHendel={selectHendel}
           selectedCatigory={selectedCatigory}
         />
-        {videos && <Video videos={videos.items} />}
+        {videos && <Video channelVideo={videos.items} />}
         {isError && <div className="text-white flex flex-col items-center">
           <img src={errorImage} alt="error image" className="pb-3" />
           <h1 className="text-[#838383] text-center text-3xl pb-3">{errorMassage  ? "Network Error" : "Interlal server error please try again later" }</h1>

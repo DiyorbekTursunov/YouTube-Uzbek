@@ -21,15 +21,14 @@ interface VideoData {
 }
 
 interface VideoProps {
-  videos: VideoData[]; 
+  channelVideo: VideoData[]; 
 }
 
-const Video: React.FC<VideoProps> = ({ videos }) => {
-
+const Video: React.FC<VideoProps> = ({ channelVideo }) => {
   return (
       <div className="flex flex-wrap justify-center">
-        {videos &&
-          videos.map((video, i) => (
+        {channelVideo &&
+          channelVideo.map((video, i) => (
             <Fragment key={i}>
               {video.id.videoId && (
                 <VideoCard video={video} key={video.id.videoId} />
