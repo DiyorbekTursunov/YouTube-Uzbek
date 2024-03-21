@@ -2,32 +2,34 @@ import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-interface Video {
+interface SuggestedVideoItem {
   id: {
     videoId: string;
   };
   snippet: {
+    title: string;
     thumbnails: {
-      high: {
+      high?: {
+        url: string;
+      };
+      medium?: {
         url: string;
       };
     };
-    description: string;
     channelTitle: string;
-    title: string;
     publishedAt: string;
   };
 }
 
 interface SuggestedProps {
-  SuggestedVideo: Video[];
+  SuggestedVideo: SuggestedVideoItem[] | null;
 }
 
 const Suggested: React.FC<SuggestedProps> = ({ SuggestedVideo }) => {
   return (
     <>
       {SuggestedVideo &&
-        SuggestedVideo.map((video: Video) => {
+        SuggestedVideo.map((video: SuggestedVideoItem) => {
           return (
             <div
               className="cursor-pointer flex sm:items-center max-sm:items-start md:flex-row sm:flex-col max-sm:flex-col flex-col justify-center gap-[20px] max-w-[400px]  px-3 py-2 rounded-2xl"
@@ -36,7 +38,7 @@ const Suggested: React.FC<SuggestedProps> = ({ SuggestedVideo }) => {
               <Link to={`/video/${video.id.videoId}`}>
                 <div>
                   <img
-                    src={video.snippet.thumbnails.high.url}
+                    src={video.snippet.thumbnails?.high?.url || ''}
                     alt="Video img"
                     className="rounded-[10px] truncate w-[328px] h-[100px] object-cover sm:h-[] max-sm:h-[220px]"
                   />

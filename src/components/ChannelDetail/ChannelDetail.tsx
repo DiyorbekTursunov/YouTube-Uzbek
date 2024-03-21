@@ -13,7 +13,7 @@ import { channelDetailType, channelVideoType } from 'types'
 export const ChannelDetail: React.FC = () => {
   const [sub, setSub] = useState<string>('bg-[#ff0707] text-[#fff]');
   const [channelDetail, setChannelDetail] = useState<channelDetailType | null>(null);
-  const [channelVideo, setChannelVideo] = useState<channelVideoType | null>(null);
+  const [channelVideo, setChannelVideo] = useState<channelVideoType[]>([]);
   const [banner, setBanner] = useState<string | null>(null);
   const [loading, setLoading] = useState(false)
   const { id } = useParams<{ id: string }>();
@@ -69,7 +69,7 @@ export const ChannelDetail: React.FC = () => {
       </div>
       <div>
         <div className='max-w-[1440px] mx-auto mt-[100px]'>
-          <Video channelVideo={channelVideo} />
+          <Video channelVideo={channelVideo || []} />
         </div>
       </div>
 

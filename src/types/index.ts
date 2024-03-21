@@ -81,7 +81,7 @@ export interface channelVideoType {
     id: {
         kind: string;
         playlistId: string;
-        videoId:string
+        videoId: string
     };
     snippet: {
         publishedAt: string;
@@ -113,18 +113,64 @@ export interface channelVideoType {
 
 export interface VideoDataType {
     id: {
-      videoId?: string;
-      playlistId?:string;
+        videoId?: string;
+        playlistId?: string;
     };
     snippet?: {
-      thumbnails?: {
-        high?: {
-          url?: string;
+        thumbnails?: {
+            high?: {
+                url?: string;
+            };
         };
-      };
-      title?: string;
-      channelId?: string;
-      channelTitle?: string;
-      publishedAt?: string;
+        title?: string;
+        channelId?: string;
+        channelTitle?: string;
+        publishedAt?: string;
     };
-  }
+}
+
+
+export interface VideoSnippet {
+    description: string;
+    title: string;
+    thumbnails: {
+        high: {
+            url: string;
+        };
+    };
+    channelId: string;
+    channelTitle: string;
+    publishedAt: string;
+}
+
+export interface VideoStatistics {
+    viewCount: string;
+    likeCount: string;
+    commentCount: string;
+}
+
+export interface VideoItem {
+    id: string;
+    snippet: VideoSnippet;
+    statistics: VideoStatistics;
+}
+
+export interface SuggestedVideoItem {
+    id: {
+        videoId: string;
+    };
+    snippet: {
+        title: string;
+        thumbnails: {
+            medium: {
+                url: string;
+            };
+        };
+        channelTitle: string;
+        publishedAt: string;
+    };
+}
+
+export interface SuggestedVideo {
+    items: SuggestedVideoItem[];
+}

@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import Categorys from "../Categorys/Categorys";
 import Video from "../video/Video";
-import { ApiService } from "../../service/api.servise";
+import ApiService from "../../service/api.servise";
+
 import errorImage from "../images/error.png"
 
 //types 
-import { homevideosType, catchErrorType } from "types";
+import { homevideosType } from "types";
 
 export const Home = () => {
 
   const [videos, setVideos] = useState<homevideosType | null>(null);
   const [selectedCatigory, setSelectedCatigory] = useState<string>("Texno Plov");
   const [loading, setloading] = useState<boolean>(false)
-  const [isError, setisError] = useState<boolean>()
-  const [errorMassage, seterrorMassage] = useState<boolean>()
+  const [error, setError] = useState<{ message: string, networkError: boolean } | null>(null);
 
-  // 
+
   const selectHendel = (catigory: string) => setSelectedCatigory(catigory);
 
   useEffect(() => {
@@ -25,19 +25,17 @@ export const Home = () => {
         const data = await ApiService.Feching(
           `search?part=snippet&q=${selectedCatigory}`
         );
-
         setVideos(data);
-        setloading(false)
-        setisError(false)
-        seterrorMassage(false)
-      } catch (error: catchErrorType | any) {
-        console.log(error);
-        if (error.code === "ERR_NETWORK") seterrorMassage(true)
-        console.log(error);
-        
-        setloading(false)
-        setisError(true)
+      } catch (error) {
+        const err = error as { code?: string };
+
+        if (err.code === "ERR_NETWORK") {
+          setError({ message: "Network Error", networkError: true });
+        } else {
+          setError({ message: "Internal server error. Please try again later.", networkError: false });
+        }
       }
+      setloading(false)
     };
     getData();
   }, [selectedCatigory]);
@@ -51,11 +49,15 @@ export const Home = () => {
           selectedCatigory={selectedCatigory}
         />
         {videos && <Video channelVideo={videos.items} />}
-        {isError && <div className="text-white flex flex-col items-center">
-          <img src={errorImage} alt="error image" className="pb-3" />
-          <h1 className="text-[#838383] text-center text-3xl pb-3">{errorMassage ? "Network Error" : "Interlal server error please try again later"}</h1>
-          <p className="text-center text-[#838383]">{!!errorMassage || "more details: the number of requests for the youtube api is over, if more than 500 requests are sent per day, the server will stop working, please try tomorrow"}</p>
-        </div>}
+        {error && (
+          <div className="text-white flex flex-col items-center">
+            <img src={errorImage} alt="error image" className="pb-3" />
+            <h1 className="text-[#838383] text-center text-3xl pb-3">{error.message}</h1>
+            <p className="text-center text-[#838383]">
+              {error.networkError ? "More details: the number of requests for the YouTube API is over. If more than 500 requests are sent per day, the server will stop working. Please try again tomorrow." : ""}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

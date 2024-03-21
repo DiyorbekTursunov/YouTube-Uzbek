@@ -2,66 +2,40 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 import Suggested from "../Suggested/Suggested";
-import { ApiService } from "../../service/api.servise";
-
-interface VideoSnippet {
-  description: string,
-  title: string;
-  thumbnails: {
-    high: {
-      url: string;
-    };
-  };
-  channelId: string;
-  channelTitle: string;
-  publishedAt: string;
-}
-
-interface VideoStatistics {
-  viewCount: string;
-  likeCount: string;
-  commentCount: string;
-}
-
-interface VideoItem {
-  id: string;
-  snippet: VideoSnippet;
-  statistics: VideoStatistics;
-}
+import ApiService  from "../../service/api.servise";
 
 
+import {SuggestedVideo, VideoItem} from "types"
 
-
-
- export const VideoDetail: React.FC = () => {
+export const VideoDetail: React.FC = () => {
   const [videoDetail, setVideoDetail] = useState<VideoItem[]>([]);
-  const [suggestedVideo, setSuggestedVideo] = useState<any | null>(null);
+  const [suggestedVideo, setSuggestedVideo] = useState<SuggestedVideo | null>(
+    null
+  );
   const [like, setLike] = useState<string>("text-[#fff]");
   const [line, setLine] = useState<number>(0);
-  const [loading, setloading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     const getData = async () => {
-      setloading(true)
+      setLoading(true);
       try {
         const data = await ApiService.Feching(
           `videos?part=snippet,statistics&id=${id}`
         );
         setVideoDetail(data.items);
-        await data.items.forEach((element: any) => {
-          console.log(element);
-
-          document.title = element.snippet.title
+        data.items.forEach((element: VideoItem) => {
+          document.title = element.snippet.title;
         });
         const relatedData = await ApiService.Feching(
           `search?part=snippet&relatedToVideoId=${id}&type=video`
         );
         setSuggestedVideo(relatedData);
-        setloading(false)
+        setLoading(false);
       } catch (err) {
-        setloading(false)
+        setLoading(false);
       }
     };
     getData();
@@ -69,15 +43,29 @@ interface VideoItem {
 
   return (
     <div className="bg-[#121212] w-full">
-      {loading && <div className="bg-slate-950 absolute w-full h-full top-0 left-0 opacity-90 z-50 flex justify-center items-center">
-<div role="status">
-    <svg aria-hidden="true" className="w-28 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-    </svg>
-    <span className="sr-only">Loading...</span>
-</div>
-</div>}
+      {loading && (
+        <div className="bg-slate-950 absolute w-full h-full top-0 left-0 opacity-90 z-50 flex justify-center items-center">
+          <div role="status">
+            <svg
+              aria-hidden="true"
+              className="w-28 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      )}
       <div className=" flex max-w-[1800px] gap-10 mx-auto  pt-6 lg:flex-row  md:flex-col sm:flex-col max-sm:flex-col px-5">
         {videoDetail.map((e, i) => (
           <div key={i} className="w-[98%]">
@@ -96,13 +84,34 @@ interface VideoItem {
                 <div className="flex items-center  gap-4">
                   <div className="flex items-center  gap-4">
                     <Link to={`/channel/${e.snippet.channelId}`}>
-                      <svg width="40px" height="40px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M691.573 338.89c-1.282 109.275-89.055 197.047-198.33 198.331-109.292 1.282-197.065-90.984-198.325-198.331-0.809-68.918-107.758-68.998-106.948 0 1.968 167.591 137.681 303.31 305.272 305.278C660.85 646.136 796.587 503.52 798.521 338.89c0.811-68.998-106.136-68.918-106.948 0z" fill="#4A5699" /><path d="M294.918 325.158c1.283-109.272 89.051-197.047 198.325-198.33 109.292-1.283 197.068 90.983 198.33 198.33 0.812 68.919 107.759 68.998 106.948 0C796.555 157.567 660.839 21.842 493.243 19.88c-167.604-1.963-303.341 140.65-305.272 305.278-0.811 68.998 106.139 68.919 106.947 0z" fill="#C45FA0" /><path d="M222.324 959.994c0.65-74.688 29.145-144.534 80.868-197.979 53.219-54.995 126.117-84.134 201.904-84.794 74.199-0.646 145.202 29.791 197.979 80.867 54.995 53.219 84.13 126.119 84.79 201.905 0.603 68.932 107.549 68.99 106.947 0-1.857-213.527-176.184-387.865-389.716-389.721-213.551-1.854-387.885 178.986-389.721 389.721-0.601 68.991 106.349 68.933 106.949 0.001z" fill="#E5594F" /></svg>
+                      <svg
+                        width="
+                        40px"
+                        height="40px"
+                        viewBox="0 0 1024 1024"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M691.573 338.89c-1.282 109.275-89.055 197.047-198.33 198.331-109.292 1.282-197.065-90.984-198.325-198.331-0.809-68.918-107.758-68.998-106.948 0 1.968 167.591 137.681 303.31 305.272 305.278C660.85 646.136 796.587 503.52 798.521 338.89c0.811-68.998-106.136-68.918-106.948 0z"
+                          fill="#4A5699"
+                        />
+                        <path
+                          d="M294.918 325.158c1.283-109.272 89.051-197.047 198.325-198.33 109.292-1.283 197.068 90.983 198.33 198.33 0.812 68.919 107.759 68.998 106.948 0C796.555 157.567 660.839 21.842 493.243 19.88c-167.604-1.963-303.341 140.65-305.272 305.278-0.811 68.998 106.139 68.919 106.947 0z"
+                          fill="#C45FA0"
+                        />
+                        <path
+                          d="M222.324 959.994c0.65-74.688 29.145-144.534 80.868-197.979 53.219-54.995 126.117-84.134 201.904-84.794 74.199-0.646 145.202 29.791 197.979 80.867 54.995 53.219 84.13 126.119 84.79 201.905 0.603 68.932 107.549 68.99 106.947 0-1.857-213.527-176.184-387.865-389.716-389.721-213.551-1.854-387.885 178.986-389.721 389.721-0.601 68.991 106.349 68.933 106.949 0.001z"
+                          fill="#E5594F"
+                        />
+                      </svg>
                     </Link>
                     <div>
                       <h2 className="text-[18px] text-[#f1f1f1]">
                         {e.snippet.channelTitle}
                       </h2>
-                      <p className="text-[#AAAAAA]">{parseInt(e.statistics.viewCount).toLocaleString()} views</p>
+                      <p className="text-[#AAAAAA]">
+                        {parseInt(e.statistics.viewCount).toLocaleString()} views
+                      </p>
                     </div>
                   </div>
                   <button
@@ -128,7 +137,7 @@ interface VideoItem {
                     <div className="hover:opacity-65">
                       <span className="text-[#fff] flex items-center gap-3">
                         {parseInt(e.statistics.commentCount).toLocaleString()}{" "}
-                        <i className={`fa-solid fa-comment ${''} `}></i>
+                        <i className={`fa-solid fa-comment ${""} `}></i>
                       </span>
                     </div>
                   </button>
@@ -149,7 +158,7 @@ interface VideoItem {
                   className="text-[#AAAAAA] cursor-pointer"
                   onClick={() => setLine(line ? 500 : 2)}
                 >
-                  {like == '1' ? "Show More" : "Shorten"}
+                  {like === "1" ? "Show More" : "Shorten"}
                 </span>
               </div>
             </div>
@@ -162,6 +171,7 @@ interface VideoItem {
     </div>
   );
 };
+
 
 
 // 2xl:w-[1100px] xl:w-[900px] 2xl:h-[600px] xl:h-[500px] lg:w-[650px] lg:h-[400px] md:w-full md:h-[450px] sm:w-full sm:h-[450px] max-sm:w-full max-sm:h-[200px]

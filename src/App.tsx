@@ -8,7 +8,7 @@ import { Navbar } from './components/navbar/Navbar'
 function App() {
 
   return (
-    <> {/* bg-[#121212] */}
+    <>
       <div className='w-full h-screen bg-[#121212]'>
         <Navbar />
         <Routes>
