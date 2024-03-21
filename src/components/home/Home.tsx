@@ -54,7 +54,7 @@ export const Home = () => {
             <img src={errorImage} alt="error image" className="pb-3" />
             <h1 className="text-[#838383] text-center text-3xl pb-3">{error.message}</h1>
             <p className="text-center text-[#838383]">
-              {error.networkError ? "More details: the number of requests for the YouTube API is over. If more than 500 requests are sent per day, the server will stop working. Please try again tomorrow." : ""}
+              {!error.networkError ? "More details: the number of requests for the YouTube API is over. If more than 500 requests are sent per day, the server will stop working. Please try again tomorrow." : ""}
             </p>
           </div>
         )}
