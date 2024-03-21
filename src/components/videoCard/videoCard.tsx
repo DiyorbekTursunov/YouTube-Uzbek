@@ -18,6 +18,9 @@ const VideoCard: React.FC<{ video: VideoDataType }> = ({ video }) => {
             <img
               src={video.snippet?.thumbnails?.high?.url || ""}
               alt="Video image"
+              width={100}    
+              height={100}         
+              fetchPriority="high" 
               className="rounded-[10px] w-full h-full object-cover cursor-pointer"
             />
           </div>
