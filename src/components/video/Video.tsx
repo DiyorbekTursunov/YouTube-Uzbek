@@ -8,7 +8,6 @@ import { channelVideoType } from "types";
 
 
 const Video: React.FC<{channelVideo: channelVideoType[]}> = ({ channelVideo }) => {
-  console.log(channelVideo);
   
   return (
       <div className="flex flex-wrap justify-center">

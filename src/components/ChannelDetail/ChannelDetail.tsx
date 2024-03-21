@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import bannerImg from '../images/banner.png'
 import Video from '../video/Video'
-import { ApiService } from '../../service/api.servise'
+import ApiService  from '../../service/api.servise'
 
 
 //types
