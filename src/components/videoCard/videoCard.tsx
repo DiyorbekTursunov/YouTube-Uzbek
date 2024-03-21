@@ -21,6 +21,7 @@ const VideoCard: React.FC<{ video: VideoDataType }> = ({ video }) => {
               width={100}    
               height={100}         
               fetchPriority="high" 
+              loading="lazy"
               className="rounded-[10px] w-full h-full object-cover cursor-pointer"
             />
           </div>
