@@ -66,11 +66,11 @@ export const VideoDetail: React.FC = () => {
           </div>
         </div>
       )}
-      <div className=" flex max-w-[1800px] gap-10 mx-auto  pt-6 lg:flex-row  md:flex-col sm:flex-col max-sm:flex-col px-5">
+      <div className=" flex max-w-[1800px] gap-10 mx-auto  sm:pt-6 lg:flex-row  md:flex-col sm:flex-col max-sm:flex-col px-5">
         {videoDetail.map((e, i) => (
-          <div key={i} className=" ">
+          <div key={i} className="w-full h-full ">
             <iframe
-              className="md:w-[100%] lg:h-[28%] md:h-[10%]"
+              className="w-[100%]  lg:h-[80vh] sm:h-[60vh] max-sm:h-[40vh]"
               src={`https://www.youtube.com/embed/${e.id}`}
               title="YouTube Uzbek video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
